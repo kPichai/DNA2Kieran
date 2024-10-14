@@ -4,25 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DNA 2.0 Student Code.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WORK_LOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DNA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DNATest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/0.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/0_answers.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/19.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/19_answers.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/5_answers.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/README.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/chromosome_22.txt" afterDir="false" />
+    <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="oasjdaosdjfeo">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,9 +16,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "kPichai"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ztblick/DNA2StudentCode.git",
+    "accountId": "6fbdb765-0394-449e-b522-f6d76927e3cc"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2jynXvKntnv5ayswwvnGk6UNozV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -53,7 +49,10 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RunManager">
@@ -81,9 +80,20 @@
       <option name="presentableId" value="Default" />
       <updated>1722368227958</updated>
     </task>
+    <task id="LOCAL-00001" summary="oasjdaosdjfeo">
+      <option name="closed" value="true" />
+      <created>1728864662666</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728864662666</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="oasjdaosdjfeo" />
+    <option name="LAST_COMMIT_MESSAGE" value="oasjdaosdjfeo" />
   </component>
 </project>
