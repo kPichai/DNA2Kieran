@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * DNA
  * <p>
@@ -35,23 +38,49 @@ public class DNA {
         return binarySTR;
     }
 
+    public static int incrementBinary(int binary, char toAdd) {
+        binary = binary << 2;
+        if (toAdd == 'A' || toAdd == 'a') {
+            binary += 0b00;
+        } else if (toAdd == 'C' || toAdd == 'c') {
+            binary += 0b01;
+        } else if (toAdd == 'T' || toAdd == 't') {
+            binary += 0b10;
+        } else if (toAdd == 'G' || toAdd == 'g') {
+            binary += 0b11;
+        }
+        return binary;
+    }
+
     public static int countMax(String sequence, String STR) {
         int max = 0;
         int temp = 0;
         int STRBinary = createBinarySTR(STR);
-        int curSequence;
+        int curSequence = createBinarySTR(sequence.substring(0, STR.length()));
+        Queue<Integer> possibleBeginningSTR = new LinkedList<Integer>();
 
-        for (int i = 0; i < sequence.length() - STR.length();) {
-            curSequence = createBinarySTR(sequence.substring(i, i + STR.length()));
+        for (int i = STR.length(); i < sequence.length() - STR.length(); i++) {
+            curSequence = incrementBinary(curSequence, sequence.charAt(i));
             if (curSequence == STRBinary) {
                 temp += 1;
-                i += STR.length();
+                for (int j = 0; j < STR.length(); j++) {
+                    i++;
+                    curSequence = incrementBinary(curSequence, sequence.charAt(i));
+                    if (curSequence == STRBinary) {
+                        if (possibleBeginningSTR.isEmpty() || possibleBeginningSTR.peek() + STR.length() != i) {
+                            possibleBeginningSTR.add(i);
+                        }
+                    }
+                }
             } else {
                 if (temp > 0 && temp > max) {
                     max = temp;
                     temp = 0;
                 }
-                i++;
+                if (!possibleBeginningSTR.isEmpty()) {
+                    i = possibleBeginningSTR.remove();
+                    curSequence = createBinarySTR(sequence.substring(i, i + STR.length()));
+                }
             }
         }
 

@@ -1,0 +1,109 @@
+Index: src/DNA.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/**\n * DNA\n * <p>\n * A puzzle created by Zach Blick\n * for Adventures in Algorithms\n * at Menlo School in Atherton, CA\n *</p>\n * <p>\n * Completed by: Kieran Pichai\n *</p>\n */\n\npublic class DNA {\n\n    /**\n     * TODO: Complete this function, STRCount(), to return longest consecutive run of STR in sequence.\n     */\n    public static int createBinarySTR(String STR) {\n        int binarySTR = 0b0;\n        for (int i = 0; i < STR.length(); i++) {\n            if (STR.charAt(i) == 'A' || STR.charAt(i) == 'a') {\n                binarySTR = binarySTR << 2;\n                binarySTR += 0b00;\n            } else if (STR.charAt(i) == 'C' || STR.charAt(i) == 'c') {\n                binarySTR = binarySTR << 2;\n                binarySTR += 0b01;\n            } else if (STR.charAt(i) == 'T' || STR.charAt(i) == 't') {\n                binarySTR = binarySTR << 2;\n                binarySTR += 0b10;\n            } else if (STR.charAt(i) == 'G' || STR.charAt(i) == 'g') {\n                binarySTR = binarySTR << 2;\n                binarySTR += 0b11;\n            }\n        }\n        return binarySTR;\n    }\n\n    public static int countMax(String sequence, String STR) {\n        int max = 0;\n        int temp = 0;\n        int STRBinary = createBinarySTR(STR);\n        int curSequence;\n\n        for (int i = 0; i < sequence.length() - STR.length();) {\n            curSequence = createBinarySTR(sequence.substring(i, i + STR.length()));\n            if (curSequence == STRBinary) {\n                temp += 1;\n                i += STR.length();\n            } else {\n                if (temp > 0 && temp > max) {\n                    max = temp;\n                    temp = 0;\n                }\n                i++;\n            }\n        }\n\n        return max;\n    }\n\n    public static int STRCount(String sequence, String STR) {\n        return countMax(sequence, STR);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/DNA.java b/src/DNA.java
+--- a/src/DNA.java	(revision 76e0820e13c8d7d0336824251d9562d82875ab6e)
++++ b/src/DNA.java	(date 1729456642412)
+@@ -1,3 +1,6 @@
++import java.util.LinkedList;
++import java.util.Queue;
++
+ /**
+  * DNA
+  * <p>
+@@ -35,23 +38,43 @@
+         return binarySTR;
+     }
+ 
++    public static int incrementBinary(int binary, char toAdd) {
++        binary = binary << 2;
++        if (toAdd == 'A' || toAdd == 'a') {
++            binary += 0b00;
++        } else if (toAdd == 'C' || toAdd == 'c') {
++            binary += 0b01;
++        } else if (toAdd == 'T' || toAdd == 't') {
++            binary += 0b10;
++        } else if (toAdd == 'G' || toAdd == 'g') {
++            binary += 0b11;
++        }
++        return binary;
++    }
++
+     public static int countMax(String sequence, String STR) {
+         int max = 0;
+         int temp = 0;
+         int STRBinary = createBinarySTR(STR);
+-        int curSequence;
++        int curSequence = createBinarySTR(sequence.substring(0, STR.length()));
++        Queue<Integer> possibleBeginningSTR = new LinkedList<Integer>();
+ 
+-        for (int i = 0; i < sequence.length() - STR.length();) {
+-            curSequence = createBinarySTR(sequence.substring(i, i + STR.length()));
++        for (int i = STR.length(); i < sequence.length() - 1; i++) {
++            curSequence = incrementBinary(curSequence, sequence.charAt(i));
+             if (curSequence == STRBinary) {
+                 temp += 1;
+-                i += STR.length();
++                for (int j = 0; j < STR.length(); j++) {
++                    i++;
++                    curSequence = incrementBinary(curSequence, sequence.charAt(i));
++                    if (curSequence == STRBinary) {
++                        possibleBeginningSTR.add(i);
++                    }
++                }
+             } else {
+                 if (temp > 0 && temp > max) {
+                     max = temp;
+                     temp = 0;
+                 }
+-                i++;
+             }
+         }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"6d822f69-9e3c-4e2b-8ee1-11779bb646bd\" name=\"Changes\" comment=\"oasjdaosdjfeo\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/WORK_LOG.md\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/WORK_LOG.md\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/DNA.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/DNA.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;kPichai&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/ztblick/DNA2StudentCode.git&quot;,\n    &quot;accountId&quot;: &quot;6fbdb765-0394-449e-b522-f6d76927e3cc&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 7\n}</component>\n  <component name=\"ProjectId\" id=\"2jynXvKntnv5ayswwvnGk6UNozV\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\n    &quot;JUnit.DNATest.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.DNATest.testBasic.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.DNATest.testChromosome22.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.DNATest.testEvenMore.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.DNATest.testLargest.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.DNATest.testMore.executor&quot;: &quot;Run&quot;,\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;\n  }\n}</component>\n  <component name=\"RunManager\" selected=\"JUnit.DNATest.testBasic\">\n    <configuration name=\"DNATest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DNA 2.0 Student Code\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"homebrew-18\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"DNATest\" />\n      <option name=\"METHOD_NAME\" value=\"\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"DNATest.testBasic\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DNA 2.0 Student Code\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"DNATest\" />\n      <option name=\"METHOD_NAME\" value=\"testBasic\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"DNATest.testChromosome22\" type=\"JUnit\" factoryName=\"JUnit\" nameIsGenerated=\"true\">\n      <module name=\"DNA 2.0 Student Code\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"homebrew-18\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"DNATest\" />\n      <option name=\"METHOD_NAME\" value=\"testChromosome22\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"DNATest.testEvenMore\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DNA 2.0 Student Code\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"DNATest\" />\n      <option name=\"METHOD_NAME\" value=\"testEvenMore\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"DNATest.testLargest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DNA 2.0 Student Code\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"DNATest\" />\n      <option name=\"METHOD_NAME\" value=\"testLargest\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"DNATest.testMore\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DNA 2.0 Student Code\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"DNATest\" />\n      <option name=\"METHOD_NAME\" value=\"testMore\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <list>\n      <item itemvalue=\"JUnit.DNATest.testChromosome22\" />\n      <item itemvalue=\"JUnit.DNATest\" />\n      <item itemvalue=\"JUnit.DNATest.testBasic\" />\n      <item itemvalue=\"JUnit.DNATest.testEvenMore\" />\n      <item itemvalue=\"JUnit.DNATest.testLargest\" />\n      <item itemvalue=\"JUnit.DNATest.testMore\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"JUnit.DNATest.testBasic\" />\n        <item itemvalue=\"JUnit.DNATest.testLargest\" />\n        <item itemvalue=\"JUnit.DNATest.testEvenMore\" />\n        <item itemvalue=\"JUnit.DNATest.testMore\" />\n        <item itemvalue=\"JUnit.DNATest\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"6d822f69-9e3c-4e2b-8ee1-11779bb646bd\" name=\"Changes\" comment=\"\" />\n      <created>1722368227958</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1722368227958</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"oasjdaosdjfeo\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1728864662666</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1728864662666</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"oasjdaosdjfeo\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1728878879000</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1728878879000</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"oasjdaosdjfeo\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"oasjdaosdjfeo\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 76e0820e13c8d7d0336824251d9562d82875ab6e)
++++ b/.idea/workspace.xml	(date 1729456320124)
+@@ -6,7 +6,6 @@
+   <component name="ChangeListManager">
+     <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="oasjdaosdjfeo">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/WORK_LOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/WORK_LOG.md" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/DNA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DNA.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -169,7 +168,23 @@
+       <option name="project" value="LOCAL" />
+       <updated>1728878879000</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="oasjdaosdjfeo">
++      <option name="closed" value="true" />
++      <created>1728969106034</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1728969106034</updated>
++    </task>
++    <task id="LOCAL-00004" summary="oasjdaosdjfeo">
++      <option name="closed" value="true" />
++      <created>1728969145409</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1728969145409</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
