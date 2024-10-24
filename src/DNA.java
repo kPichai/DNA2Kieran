@@ -27,6 +27,7 @@ public class DNA {
             binarySTR = binarySTR << 2;
             binarySTR += charMap[STR.charAt(i)];
         }
+
         return binarySTR;
     }
 
@@ -57,14 +58,12 @@ public class DNA {
 
     // Counts the maximum amount of STR repeats in a given sequence
     public static int countMax(String sequence, String STR) {
-        // Initializes all critical values to operation of finding the max
         int max = 0;
-        // Hashes the STR
+        // Hashes the STR and first sequence
         int STRBinary = createBinarySTR(STR);
+        int curSequence = createBinarySTR(sequence.substring(0, STR.length()));
         // Array that tracks number of current repetitions of STR at any instance in the code
         int[] repetitions = new int[STR.length()];
-        // Hashes the first section of STR length of the DNA sequence
-        int curSequence = createBinarySTR(sequence.substring(0, STR.length()));
         int mask = generateMask(STR.length());
         int len = sequence.length();
         int lenSTR = STR.length();
@@ -112,6 +111,7 @@ public class DNA {
         return max;
     }
 
+    // Main function to return the max counted repetitions, only needs sequence to search in and STR to find
     public static int STRCount(String sequence, String STR) {
         return countMax(sequence, STR);
     }
